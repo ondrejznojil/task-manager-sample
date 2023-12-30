@@ -1,0 +1,9 @@
+{
+  "name": "task-manager-sample",
+  "version": "1.0.0",
+  "description": "Code sample of Typescript API implementing simple http server for handling task assignment.",
+  "main": "src/index.js",
+  "repository": "https://github.com/ondrejznojil/task-manager-sample.git",
+  "author": "Onřej Znojil <ondrej.znojil@gmail.com>",
+  "license": "MIT"
+}
