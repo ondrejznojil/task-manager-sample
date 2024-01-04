@@ -1,10 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AgentModule } from './agent/agent.module';
+import { SequelizeModule } from '@nestjs/sequelize';
+import config from './config/config';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    AgentModule,
+    SequelizeModule.forRoot({
+      ...config.database,
+      autoLoadModels: true,
+      synchronize: true,
+    }),
+  ],
 })
 export class AppModule {}

@@ -20,7 +20,8 @@ services:
       - ./.docker/mariadb/init:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: root
-    command: ['mysqld', '--character-set-server=utf8', '--collation-server=utf8_general_ci']
+    ports:
+      - '3306:3306'
 
   phpmyadmin:
     container_name: task_manager_phpmyadmin
@@ -30,4 +31,4 @@ services:
     ports:
       - '8181:80'
     environment:
-      PMA_HOST: node
+      PMA_HOST: task_manager_db
