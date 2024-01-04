@@ -18,7 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "database:create-schema": "yarn run ts-node tools/sync-database.ts"
+    "db:create-schema": "yarn run ts-node tools/sync-database.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
