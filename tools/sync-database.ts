@@ -3,11 +3,12 @@
 import { Sequelize } from 'sequelize-typescript';
 import config from '../src/config/config';
 import { Agent } from '../src/agent/agent.model';
+import { Task } from '../src/task/task.model';
 
 async function syncDatabase() {
   const sequelize = new Sequelize({
     ...config.database,
-    models: [Agent],
+    models: [Agent, Task],
   });
 
   try {
