@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Task } from './task.model';
-import { Agent } from '../agent/agent.model';
+import { CreateTaskInput } from './dto/createTask.input';
 
 @Injectable()
 export class TaskRepository {
@@ -10,14 +10,17 @@ export class TaskRepository {
     private readonly taskModel: typeof Task,
   ) {}
 
-  async createTask(taskData: Partial<Task>, dueAt: Date): Promise<Task> {
+  public async createTask(
+    taskData: CreateTaskInput,
+    dueAt: Date,
+  ): Promise<Task> {
     return this.taskModel.create({
       ...taskData,
       dueAt,
     });
   }
 
-  async findTaskById(id: number): Promise<Task | null> {
+  public async findTaskById(id: number): Promise<Task | null> {
     return this.taskModel.findOne({ where: { id } });
   }
 }

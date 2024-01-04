@@ -1,4 +1,11 @@
-import { AllowNull, Column, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { Agent } from '../agent/agent.model';
 
 @Table
 export class Task extends Model {
@@ -15,4 +22,11 @@ export class Task extends Model {
     allowNull: true,
   })
   completedAt: Date;
+
+  @ForeignKey(() => Agent)
+  @Column
+  agentId: number;
+
+  @BelongsTo(() => Agent)
+  agent: Agent;
 }

@@ -12,8 +12,6 @@ import { QueueModule } from './queue/queue.module';
     QueueModule,
     SequelizeModule.forRoot({
       ...config.database,
-      autoLoadModels: true,
-      synchronize: true,
     }),
   ],
 })
