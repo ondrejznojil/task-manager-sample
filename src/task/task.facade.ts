@@ -8,6 +8,7 @@ import { Task } from './task.model';
 import { CreateTaskInput } from './dto/createTask.input';
 import { AgentRepository } from '../agent/agent.repository';
 import { TaskDueCalculatorService } from './taskDue/taskDueCalculator.service';
+import { TaskDueSchedulerService } from './taskDue/taskDueScheduler.service';
 
 @Injectable()
 export class TaskFacade {
@@ -15,6 +16,7 @@ export class TaskFacade {
     private readonly taskRepository: TaskRepository,
     private readonly agentRepository: AgentRepository,
     private readonly taskDueCalculatorService: TaskDueCalculatorService,
+    private readonly taskDueScheduler: TaskDueSchedulerService,
   ) {}
 
   public async createTask(taskData: CreateTaskInput): Promise<Task> {
@@ -30,7 +32,11 @@ export class TaskFacade {
       taskData.durationInMinutes,
     );
 
-    return this.taskRepository.createTask(taskData, dueAt);
+    const task = await this.taskRepository.createTask(taskData, dueAt);
+
+    this.taskDueScheduler.scheduleCheckTaskDoneJob(task);
+
+    return task;
   }
 
   public async markTaskAsDone(taskId: number): Promise<Task> {

@@ -24,6 +24,7 @@ export class TaskController {
   @Post(':taskId/markAsDone')
   async markTaskAsDone(@Param('taskId') taskId: number) {
     const task: Task = await this.taskFacade.markTaskAsDone(taskId);
+
     return { success: true, task };
   }
 }

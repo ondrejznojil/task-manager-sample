@@ -6,10 +6,17 @@ import { TaskFacade } from './task.facade';
 import { TaskRepository } from './task.repository';
 import { AgentModule } from '../agent/agent.module';
 import { TaskDueCalculatorService } from './taskDue/taskDueCalculator.service';
+import { QueueModule } from '../queue/queue.module';
+import { TaskDueSchedulerService } from './taskDue/taskDueScheduler.service';
 
 @Module({
-  imports: [AgentModule, SequelizeModule.forFeature([Task])],
+  imports: [QueueModule, AgentModule, SequelizeModule.forFeature([Task])],
   controllers: [TaskController],
-  providers: [TaskFacade, TaskRepository, TaskDueCalculatorService],
+  providers: [
+    TaskFacade,
+    TaskRepository,
+    TaskDueCalculatorService,
+    TaskDueSchedulerService,
+  ],
 })
 export class TaskModule {}
