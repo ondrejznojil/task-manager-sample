@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { TaskRepository } from './task.repository';
 import { Task } from './task.model';
 import { CreateTaskInput } from './dto/createTask.input';
@@ -27,5 +31,24 @@ export class TaskFacade {
     );
 
     return this.taskRepository.createTask(taskData, dueAt);
+  }
+
+  public async markTaskAsDone(taskId: number): Promise<Task> {
+    const task = await this.taskRepository.findTaskById(taskId);
+    if (task === null) {
+      throw new NotFoundException(
+        `Task with specified ID ${taskId} does not exist.`,
+      );
+    }
+
+    if (task.completedAt !== null) {
+      throw new UnprocessableEntityException(
+        `Task with specified ID ${taskId} has already been marked done.`,
+      );
+    }
+
+    task.completedAt = new Date();
+
+    return task.save();
   }
 }

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Param,
   Post,
   UsePipes,
   ValidationPipe,
@@ -17,6 +18,12 @@ export class TaskController {
   @UsePipes(new ValidationPipe({ transform: true }))
   async createTask(@Body() createTaskInput: CreateTaskInput) {
     const task: Task = await this.taskFacade.createTask(createTaskInput);
+    return { success: true, task };
+  }
+
+  @Post(':taskId/markAsDone')
+  async markTaskAsDone(@Param('taskId') taskId: number) {
+    const task: Task = await this.taskFacade.markTaskAsDone(taskId);
     return { success: true, task };
   }
 }

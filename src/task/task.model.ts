@@ -1,4 +1,4 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import { AllowNull, Column, Model, Table } from 'sequelize-typescript';
 
 @Table
 export class Task extends Model {
@@ -10,4 +10,9 @@ export class Task extends Model {
 
   @Column
   dueAt: Date;
+
+  @Column({
+    allowNull: true,
+  })
+  completedAt: Date;
 }
