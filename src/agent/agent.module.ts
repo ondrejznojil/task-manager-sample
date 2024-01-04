@@ -9,5 +9,6 @@ import { AgentRepository } from './agent.repository';
   imports: [SequelizeModule.forFeature([Agent])],
   controllers: [AgentController],
   providers: [AgentFacade, AgentRepository],
+  exports: [AgentRepository],
 })
 export class AgentModule {}

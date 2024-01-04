@@ -14,6 +14,10 @@ export class AgentRepository {
   }
 
   async findAgentByEmail(email: string): Promise<Agent | null> {
-    return await this.agentModel.findOne({ where: { email } });
+    return this.agentModel.findOne({ where: { email } });
+  }
+
+  async findAgentById(id: number): Promise<Agent | null> {
+    return this.agentModel.findOne({ where: { id } });
   }
 }
