@@ -9,15 +9,15 @@ export class AgentRepository {
     private readonly agentModel: typeof Agent,
   ) {}
 
-  async createAgent(agentData: Partial<Agent>): Promise<Agent> {
+  public async createAgent(agentData: Partial<Agent>): Promise<Agent> {
     return this.agentModel.create(agentData);
   }
 
-  async findAgentByEmail(email: string): Promise<Agent | null> {
+  public async findAgentByEmail(email: string): Promise<Agent | null> {
     return this.agentModel.findOne({ where: { email } });
   }
 
-  async findAgentById(id: number): Promise<Agent | null> {
+  public async findAgentById(id: number): Promise<Agent | null> {
     return this.agentModel.findOne({ where: { id } });
   }
 }

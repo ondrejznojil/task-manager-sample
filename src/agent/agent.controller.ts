@@ -14,7 +14,7 @@ export class AgentController {
 
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
-  async createAgent(@Body() createAgentInput: CreateAgentInput) {
+  public async createAgent(@Body() createAgentInput: CreateAgentInput) {
     const { name, email } = createAgentInput;
     const agent = await this.agentFacade.createAgent(name, email);
     return { success: true, agent };

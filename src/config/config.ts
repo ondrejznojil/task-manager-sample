@@ -14,6 +14,10 @@ const config = {
     synchronize: true,
     logging: false,
   },
+  redis: {
+    host: process.env.REDIS_HOST,
+    port: Number(process.env.REDIS_PORT),
+  },
 };
 
 export default config;

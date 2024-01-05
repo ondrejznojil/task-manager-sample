@@ -6,7 +6,7 @@ import { Agent } from './agent.model';
 export class AgentFacade {
   constructor(private readonly agentRepository: AgentRepository) {}
 
-  async createAgent(name: string, email: string): Promise<Agent> {
+  public async createAgent(name: string, email: string): Promise<Agent> {
     const existingAgent = await this.agentRepository.findAgentByEmail(email);
 
     if (existingAgent) {

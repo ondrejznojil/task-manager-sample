@@ -10,12 +10,13 @@ services:
     depends_on:
       - db
     ports:
-      - '3008:3008'
+      - '${APP_PORT}:3008'
 
   redis:
+    container_name: task_manager_redis
     image: redis:7.2
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT}:6379"
 
   db:
     container_name: task_manager_db
@@ -26,7 +27,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - '3306:3306'
+      - '${MARIADB_PORT}:3306'
 
   phpmyadmin:
     container_name: task_manager_phpmyadmin
@@ -34,6 +35,6 @@ services:
     depends_on:
       - db
     ports:
-      - '8181:80'
+      - '${PHPMYADMIN_PORT}:80'
     environment:
       PMA_HOST: task_manager_db

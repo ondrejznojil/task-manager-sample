@@ -2,6 +2,7 @@
 
 import { Injectable } from '@nestjs/common';
 import * as kue from 'kue';
+import config from '../config/config';
 
 @Injectable()
 export class QueueService {
@@ -10,10 +11,7 @@ export class QueueService {
   constructor() {
     // Initialize the Kue queue
     this.queue = kue.createQueue({
-      redis: {
-        host: 'redis',
-        port: 6379,
-      },
+      redis: config.redis,
     });
   }
 
